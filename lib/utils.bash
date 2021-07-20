@@ -71,7 +71,9 @@ install_version() {
 
   source $venv_path/bin/activate
 
-  cd ${install_path}/tmp/$TOOL_NAME-$version
+  ls ${install_path}/tmp/${TOOL_NAME}-${version}
+
+  cd ${install_path}/tmp/${TOOL_NAME}-${version}
 
   setup.py install
 
