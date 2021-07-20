@@ -69,7 +69,7 @@ install_version() {
 
   ls ${install_path}
 
-  ls ${install_path}/tmp}
+  ls ${install_path}/tmp
 
   mv "$ASDF_DOWNLOAD_PATH/*" "${install_path}/tmp/$TOOL_NAME-$version"
 
