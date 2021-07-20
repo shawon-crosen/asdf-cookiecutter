@@ -67,7 +67,7 @@ install_version() {
 
   mkdir -p "${install_path}/tmp/$TOOL_NAME-$version"
 
-  cp -r "${ASDF_DOWNLOAD_PATH}/*" "${install_path}/tmp/${TOOL_NAME}-${version}"
+  cp -r ${ASDF_DOWNLOAD_PATH}/* ${install_path}/tmp/${TOOL_NAME}-${version}
 
   source $venv_path/bin/activate
 
