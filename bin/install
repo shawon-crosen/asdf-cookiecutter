@@ -2,10 +2,42 @@
 
 set -euo pipefail
 
-current_script_path=${BASH_SOURCE[0]}
-plugin_dir=$(dirname "$(dirname "$current_script_path")")
+get_download_url() {
+    local_version="$1"
+    echo "https://codeload.github.com/cookiecutter/cookiecutter/tar.gz/${local_version}"
+}
 
-# shellcheck source=../lib/utils.bash
-source "${plugin_dir}/lib/utils.bash"
+install_cookiecutter() {
+    local install_type=$1
+    local version=$2
+    local install_path=$3
+    local bin_install_path="${install_path}/bin"
+    local venv_path="$install_path/venv"
+    local download_url="$(get_download_url $version)"
+
+    mkdir -p "${bin_install_path}"
+
+    python -m venv $venv_path
+
+    local bin_path="${bin_isntall_path}/cookiecutter"
+    echo "Downloading cookiecutter from ${download_url}"
+
+    mkdir -p "${install_path}/tmp"
+    curl -s ${download_url} -o "${install_path}/tmp/cookiecutter-${version}.tar.gz"
+
+    tar -xf "${install_path}/tmp/cookiecutter-${version}.tar.gz" -C "${install_path}/tmp"
+
+    source $venv_path/bin/activate
+
+    cd ${install_path}/tmp/cookiecutter
+
+    setup.py install
+
+    cd ${install_path}
+
+    rm -rf ./tmp/
+
+    ln -s ${bin_install_path}/cookiecutter ${venv_path}/bin/cookiecutter
+}
 
 install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
