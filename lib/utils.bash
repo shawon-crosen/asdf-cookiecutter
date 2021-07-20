@@ -46,6 +46,7 @@ download_release() {
 install_version() {
 
   echo "Installing $TOOL_NAME"
+  pwd
 
   local install_type="$1"
   local version="$2"
@@ -59,10 +60,6 @@ install_version() {
   local venv_path="$install_path/venv"
 
   mkdir -p "${bin_install_path}"
-
-  $(which python)
-
-  alias python=$(which python)
 
   python -m venv $venv_path
 
