@@ -70,6 +70,8 @@ install_version() {
 
   source $venv_path/bin/activate
 
+  which python
+
   ls ${install_path}/tmp/${TOOL_NAME}-${version}
 
   cd ${install_path}/tmp/${TOOL_NAME}-${version}
