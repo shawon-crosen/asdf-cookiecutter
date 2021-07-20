@@ -2,35 +2,7 @@
 
 set -euo pipefail
 
-install_cookiecutter() {
-    local install_type=$1
-    local version=$2
-    local install_path=$3
-    local bin_install_path="${install_path}/bin"
-    local venv_path="$install_path/venv"
+# shellcheck source=../lib/utils.bash
+source "$(dirname "$0")/../lib/utils.bash"
 
-    mkdir -p "${bin_install_path}"
-
-    python -m venv $venv_path
-
-    local bin_path="${bin_isntall_path}/cookiecutter"
-    echo "Moving cookiecutter from ${ASDF_DOWNLOAD_PATH}"
-
-    mkdir -p "${install_path}/tmp"
-
-    mv "$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION" "${install_path}/tmp"
-
-    source $venv_path/bin/activate
-
-    cd ${install_path}/tmp/cookiecutter
-
-    setup.py install
-
-    cd ${install_path}
-
-    rm -rf ./tmp/
-
-    ln -s ${bin_install_path}/cookiecutter ${venv_path}/bin/cookiecutter
-}
-
-install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
+install_version "${ASDF_INSTALL_TYPE}" "${ASDF_INSTALL_VERSION}" "${ASDF_INSTALL_PATH}"

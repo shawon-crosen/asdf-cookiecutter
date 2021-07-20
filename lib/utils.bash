@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for cookiecutter.
-GH_REPO="https://github.com/cookiecutter/cookiecutter"
+GH_REPO="github.com/cookiecutter/cookiecutter"
 TOOL_NAME="cookiecutter"
 TOOL_TEST="cookiecutter --version"
 
@@ -42,7 +42,7 @@ download_release() {
   filename="$2"
 
   # TODO: Adapt the release URL convention for cookiecutter
-  url="https://codeload.github.com/cookiecutter/cookiecutter/tar.gz/${version}"
+  url="https://codeload.${GH_REPO}/tar.gz/${version}"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
@@ -57,14 +57,37 @@ install_version() {
     fail "asdf-$TOOL_NAME supports release installs only"
   fi
 
-  (
-    mkdir -p "$install_path"
-    cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+  local bin_install_path="${install_path}/bin"
+  local venv_path="$install_path/venv"
 
+  mkdir -p "${bin_install_path}"
+
+  python -m venv $venv_path
+
+  local bin_path="${bin_isntall_path}/cookiecutter"
+  echo "Moving cookiecutter from ${ASDF_DOWNLOAD_PATH}"
+
+  mkdir -p "${install_path}/tmp"
+
+  mv "$ASDF_DOWNLOAD_PATH/$TOOL_NAME-$ASDF_INSTALL_VERSION" "${install_path}/tmp"
+
+  source $venv_path/bin/activate
+
+  cd ${install_path}/tmp/cookiecutter
+
+  setup.py install
+
+  cd ${install_path}
+
+  rm -rf ./tmp/
+
+  ln -s ${bin_install_path}/cookiecutter ${venv_path}/bin/cookiecutter
+
+  (
     # TODO: Asert cookiecutter executable exists.
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
-    test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
+    test -x "${bin_install_path}/${tool_cmd}" || fail "Expected $install_path/bin/$tool_cmd to be executable."
 
     echo "$TOOL_NAME $version installation was successful!"
   ) || (
