@@ -42,7 +42,7 @@ download_release() {
   filename="$2"
 
   # TODO: Adapt the release URL convention for cookiecutter
-  url="$GH_REPO/archive/v${version}.tar.gz"
+  url="https://codeload.github.com/cookiecutter/cookiecutter/tar.gz/${version}"
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
