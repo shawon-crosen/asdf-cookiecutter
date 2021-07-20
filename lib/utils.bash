@@ -75,6 +75,8 @@ install_version() {
 
   cd ${install_path}/tmp/${TOOL_NAME}-${version}
 
+  pwd
+
   setup.py install
 
   cd ${install_path}
