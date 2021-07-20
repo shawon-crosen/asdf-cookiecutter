@@ -46,7 +46,6 @@ download_release() {
 install_version() {
 
   echo "Installing $TOOL_NAME"
-  pwd
 
   local install_type="$1"
   local version="$2"
