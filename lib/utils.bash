@@ -68,11 +68,11 @@ install_version() {
 
   cp -r ${ASDF_DOWNLOAD_PATH}/* ${install_path}/tmp/${TOOL_NAME}-${version}
 
-  ls -la $install_path
-
   source $venv_path/bin/activate
 
-  ./setup.py install
+  cd ${install_path}/tmp/${TOOL_NAME}-${version}
+
+  python setup.py install
 
   cd ${install_path}
 
