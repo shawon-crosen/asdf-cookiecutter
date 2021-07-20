@@ -78,7 +78,7 @@ install_version() {
 
   rm -rf ./tmp/
 
-  ln -s ${bin_install_path}/cookiecutter ${venv_path}/bin/cookiecutter
+  ln -s ${venv_path}/bin/cookiecutter ${bin_install_path}/cookiecutter
 
   (
     # TODO: Asert cookiecutter executable exists.
