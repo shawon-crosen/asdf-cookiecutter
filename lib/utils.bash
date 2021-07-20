@@ -63,7 +63,6 @@ install_version() {
   python -m venv $venv_path
 
   local bin_path="${bin_install_path}/cookiecutter"
-  echo "Moving cookiecutter from ${ASDF_DOWNLOAD_PATH}"
 
   mkdir -p "${install_path}/tmp/$TOOL_NAME-$version"
 
@@ -77,7 +76,7 @@ install_version() {
 
   pwd
 
-  setup.py install
+  ./setup.py install
 
   cd ${install_path}
 
