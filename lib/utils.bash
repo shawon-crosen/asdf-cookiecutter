@@ -60,6 +60,8 @@ install_version() {
 
   mkdir -p "${bin_install_path}"
 
+  $(which python)
+
   alias python=$(which python)
 
   python -m venv $venv_path
