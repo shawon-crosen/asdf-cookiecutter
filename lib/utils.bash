@@ -44,6 +44,9 @@ download_release() {
 }
 
 install_version() {
+
+  echo "Installing $TOOL_NAME"
+
   local install_type="$1"
   local version="$2"
   local install_path="$3"
