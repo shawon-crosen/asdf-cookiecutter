@@ -60,7 +60,7 @@ install_version() {
 
   mkdir -p "${bin_install_path}"
 
-  python -m venv $venv_path
+  python3 -m venv $venv_path
 
   local bin_path="${bin_install_path}/cookiecutter"
 
