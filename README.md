@@ -18,7 +18,8 @@
 # Dependencies
 
 - `bash`, `curl`, `tar`: generic POSIX utilities.
-- `SOME_ENV_VAR`: set this environment variable in your shell config to load the correct version of tool x.
+- `python` version 3.3 or greater.
+    - This plugin will use the system `python3` to create a virtualenv in the ASDF_INSTALL_PATH. It will then install cookiecutter into that virtualenv, and create a symlink from the `ASDF_INSTALL_PATH/bin` folder to the binary in the virtualenv folder.
 
 # Install
 
@@ -34,9 +35,9 @@ cookiecutter:
 
 ```shell
 # Show all installable versions
-asdf list-all cookiecutter
+asdf list all cookiecutter
 
-# Install specific version
+# Install latest version
 asdf install cookiecutter latest
 
 # Set a version globally (on your ~/.tool-versions file)
