@@ -72,7 +72,7 @@ install_version() {
 
   cd ${install_path}/tmp/${TOOL_NAME}-${version}
 
-  python setup.py install
+  pip install .
 
   cd ${install_path}
 
